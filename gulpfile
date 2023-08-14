@@ -1,0 +1,14 @@
+require('@babel/register');
+const gulp = require('gulp');
+const babel = require('gulp-babel');
+
+function transpileJS() {
+  return gulp.src('src/js/**/*.js')
+    .pipe(babel())
+    .pipe(gulp.dest('dist/js'));
+}
+
+export const hello = (done) => {
+    console.log ('hello');
+    done();
+  }
