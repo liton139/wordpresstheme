@@ -9,7 +9,13 @@ import del from 'del';
 import webpack from 'webpack-stream';
 import uglify from 'gulp-uglify';
 import named from 'vinyl-named';
+import browserSync from 'browser-sync';
+import zip from 'gulp-zip';
+import replace from 'gulp-replace';
+import info from './package.json';
 
+
+const server = browserSync.create();
 const PRODUCTION =yargs.argv.prod;
 const sass = require('gulp-sass') (require('sass'));
 
@@ -31,7 +37,23 @@ const paths = {
     others: {
         src: ['src/assets/**/*', '!src/assets/{images,js,scss}', '!src/assets/{images,js,scss}/**/*'],
         dest: 'dist/assets'
+    },
+    package:{
+        src:['**/*', '!.vscode','!node_modules{,/**}', '!packaged{,/**}','!src{,/**}','!.babelrc','!gitignore', '!gulpfile.babel.js','!package-lock.json', '!package.json'],
+        dest: 'packaged'
     }
+}
+
+export const serve =(done) => {
+    server.init({
+        proxy: "http://193.168.0.105/wordpress/"
+    });
+    done();
+}
+
+export const reload =(done) => {
+    server.reload();
+    done();
 }
 
 export const clean = () => del(['dist']);
@@ -44,7 +66,8 @@ export const styles = () => {
         .pipe(sass().on('error', sass.logError))
         .pipe(gulpif(PRODUCTION, cleanCSS({compatibility: 'ie8'})))
         .pipe(gulpif(!PRODUCTION, sourcemaps.write()))
-        .pipe(gulp.dest(paths.styles.dest));
+        .pipe(gulp.dest(paths.styles.dest))
+        .pipe(server.stream());
 
 }
 
@@ -57,6 +80,7 @@ export const images = () => {
 export const watch = () => {
     gulp.watch('src/assets/scss/**/*.scss', styles);
     gulp.watch('src/assets/js/**/*.js', scripts);
+    gulp.watch('**/*.php');
     gulp.watch(paths.images.src, images);
     gulp.watch(paths.others.src, copy);
 }
@@ -99,8 +123,15 @@ export const scripts = () => {
         .pipe(gulp.dest(paths.scripts.dest));
 }
 
+export const compress = () => {
+    return gulp.src(paths.package.src)
+        .pipe(replace('_themename', info.name))
+        .pipe(zip(`${info.name}.zip`))
+        .pipe(gulp.dest(paths.package.dest));
+}
 
-export const dev = gulp.series(clean, gulp.parallel(styles, scripts, images, copy), watch);
+export const dev = gulp.series(clean, gulp.parallel(styles, scripts, images, copy),serve, watch);
 export const build = gulp.series(clean, gulp.parallel(styles, scripts, images, copy));
+export const bundle = gulp.series(build, compress);
 
 export default dev;

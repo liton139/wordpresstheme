@@ -17,16 +17,17 @@ use JetBrains\PhpStorm\Language;
             <a href="<?php the_permalink() ?>" title="<?php the_title_attribute(); ?>"><?php the_title()?></a>
         </h2>
         <div>
-           <?php mytheme_post_meta();?>
+           <?php _themename_post_meta();?>
         </div>
         <div>
             <?php the_excerpt(  ); ?>
         </div>
-        <?php mytheme_readmore_link(); ?>
+        <?php _themename_readmore_link(); ?>
     <?php } ?>
     <?php the_posts_pagination( )?>
+    <?php do_action( '_themename_after_pagination'); ?>
 <?php } else { ?>
-    <p><?php esc_html_e('Sorry, no posts matched your criteria.','mytheme');?></p>
+    <p><?php esc_html_e('Sorry, no posts matched your criteria.','_themename');?></p>
     <?php } ?>
     
     <?php
