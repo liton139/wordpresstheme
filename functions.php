@@ -20,4 +20,14 @@ function function_to_add($query) {
         $query->set('posts_per_page', 2);
     }
 }
+function no_posts_text($text){
+    return esc_html__( 'no Posts','firsttheme-child' );
+}
+
+add_filter( '_themename_no_posts_text','no_posts_text');
+function filter_title($title){
+    return 'Filtered' . $title;
+}
+add_filter( 'the_title','filter_title');
+
 ?>
