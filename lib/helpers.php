@@ -1,4 +1,6 @@
 <?php
+
+if(!function_exists('_themename_post_meta')){
 function _themename_post_meta(){
     /* translators: %s: Post Date */ 
    printf(
@@ -12,11 +14,11 @@ function _themename_post_meta(){
 
    );  
    
-}
+}}
 
 function _themename_readmore_link(){
 
-    echo '<a href="'. esc_url(get_permalink( )) .'"title="' . the_title_attribute(['echo' => false]) .'">';
+    echo '<a class="c-post__readmore" href="'. esc_url(get_permalink( )) .'"title="' . the_title_attribute(['echo' => false]) .'">';
 
      /* translators: %s: Post Title */ 
     printf(
