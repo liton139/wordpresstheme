@@ -4,3 +4,7 @@ v18.17.0
 gulp -v    
 CLI version: 2.3.0
 Local version: 4.0.2
+
+.fa-angle-down::before {
+    content: "\f107";
+}
