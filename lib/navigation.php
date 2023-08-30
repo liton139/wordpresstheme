@@ -21,7 +21,7 @@ function _themename_aria_hasdropdown($atts, $item, $args) {
 }
 add_filter('nav_menu_link_attributes', '_themename_aria_hasdropdown', 10, 3);
 
-function _themename_submenu_button($dir ='down', $title){
+function _themename_submenu_button( $dir ='down', $title){
     $button = '<button class="menu-button">';
     $button .= '<span class ="u-screen-reader-text menu-button-show">' . sprintf(esc_html__('show %s submenu', '_themename'), $title) . '</span>';
     $button .= '<span aria-hidden="true" class ="u-screen-reader-text menu-button-hide">' . sprintf(esc_html__('hide %s submenu', '_themename'), $title) . '</span>';
