@@ -1,11 +1,13 @@
 <?php
-    $footer_layout= '3,3,3,4';
+    $footer_layout = sanitize_text_field(get_theme_mod('_themename_footer_layout','3,3,3,3'));
+    $footer_layout = preg_replace('/\s+/', '', $footer_layout);
     $columns = explode(',', $footer_layout);
-    $footer_bg = 'dark';
+    $footer_bg = get_theme_mod('_themename_footer_bg', 'dark');
     $widgets_active = false;
     foreach ($columns as $i => $column) {
-        if ( is_active_sidebar( 'footer-sidebar-' . ($i +1 ) )){
+        if ( is_active_sidebar( 'footer-sidebar-' . ( $i + 1 ) )){
             $widgets_active = true;
+            
         }
     }
 ?>
@@ -18,10 +20,10 @@
                         echo $column ?>@medium">
                         <?php if(is_active_sidebar( 'footer-sidebar-' . ($i + 1 ))) {
                             dynamic_sidebar( 'footer-sidebar-' . ($i + 1) );
-                        } ?>
+                        }?>
                     </div>
                 <?php } ?>
             </div>
         </div>
     </div>
-<?php }?>
+<?php } ?>
