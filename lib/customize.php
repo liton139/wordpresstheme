@@ -12,6 +12,32 @@ function _themename_customize_register( $wp_customize) {
         }
     ));
 
+    /**####################################### GENERAL SETTINGS ####################################################### */
+
+    $wp_customize->add_section('_themename_general_options', array(
+        'title' => esc_html__('general Options', '_themename'),
+        'description' => esc_html__('You can change general options from here.', '_themename')
+    ));
+    $wp_customize->add_setting('_themename_accent_colour', array(
+        'default' => '#20ddae',
+        'transport'=> 'postMessage',
+        'sanitize_callback' => 'sanitize_hex_color'
+    ));
+
+    $wp_customize->add_control(
+        new WP_Customize_Color_Control(
+          $wp_customize, // WP_Customize_Manager
+          '_themename_accent_colour', // Setting id
+          array( // Args, including any custom ones.
+            'label' => __( 'Accent Color' ,'_themename'),
+            'section' => '_themename_general_options',
+          )
+        )
+      );
+
+
+
+    /**####################################### GENERAL SETTINGS ####################################################### */
 
     $wp_customize->selective_refresh->add_partial('_themename_footer_partial', array(
         'settings'=> array('_themename_footer_bg'),
