@@ -23,7 +23,7 @@ function _themename_readmore_link(){
      /* translators: %s: Post Title */ 
     printf(
         wp_kses(
-            __('Read More <script>alert("true"); <span class="u-screen-reader-text">About %s</span>','_themename'),
+            __('Read More <span class="u-screen-reader-text">About %s</span>','_themename'),
             [
                 'span' => [
                     'class' => []
@@ -34,4 +34,18 @@ function _themename_readmore_link(){
             );
     echo '</a>';
 }
+function _themename_delete_post() {
+    $url =add_query_arg([
+        'action' => '_themename_delete_post',
+        'post' => get_the_ID(),
+        'nonce' => wp_create_nonce('_themename_delete_post' . get_the_ID())
+    ], home_url());
+    if(current_user_can( 'delete_post', get_the_ID( ))){
+        echo "<a href='" . esc_url($url) . "'>" . esc_html__('Delete Post', '_themename') . "</a>";
+    } else {
+        // User doesn't have permission to delete the post
+        // You can handle this case as needed (e.g., display a message or nothing)
+    }
+    }
+
 ?>
