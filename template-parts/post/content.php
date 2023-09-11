@@ -10,4 +10,5 @@
     </div>
     <?php _themename_readmore_link(); ?>
     <?php echo _themename_delete_post(); ?> 
+    <?php get_post_meta(get_the_ID(  ),'', true); ?>
 </article>
