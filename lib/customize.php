@@ -31,9 +31,9 @@ function _themename_customize_register( $wp_customize) {
           array( // Args, including any custom ones.
             'label' => __( 'Accent Color' ,'_themename'),
             'section' => '_themename_general_options',
-          )
         )
-      );
+        )
+    );
 
 
 

@@ -12,8 +12,7 @@ $inline_styles_selectors =array(
     ),
     'button, input[type=submit],.header-nav .menu > .menu-item:not(.mega) .sub-menu .menu-item:hover > a' => array(
         'background-color' => '_themename_accent_colour',
-    ),
-     
+    ),     
 );
 
 $inline_styles ="";
