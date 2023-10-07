@@ -55,7 +55,8 @@
                 ?>
 
             </footer>
-        <?php }?>                       
+        <?php }?> 
+         <?php get_comments_link();?>                     
         <?php if(!is_single( )){_themename_readmore_link();} ?>
     </div>
 </article>
