@@ -10,9 +10,9 @@
         ?>
         <?php get_template_part('template-parts/single/navigation');?>
         <?php 
-            // if(comments_open() || get_comments_number()){
-            //     comments_template();
-            // }
+            if(comments_open() || get_comments_number()){
+                comments_template();
+            }
             comments_template();
         ?>
         
