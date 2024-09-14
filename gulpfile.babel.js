@@ -36,6 +36,7 @@ const paths = {
     },
     plugins:{
         src: ['../../plugins/_themename-metaboxes/packaged/*'],
+        src: ['../../plugins/_themename-shortcodes/packaged/*'],
         dest: ['lib/plugins']
     },
     others: {
